@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<conio.h>
+main()
+{
+int n;
+printf("Enter total processes: you want to compute");
+scanf("%d",&n);
+
+int id[n], btime[n], wtime[n],tatime[n], array[n], counter, j, temp;
+for(counter=0;counter<n;counter++)
+{
+printf("Enter process %d id: ",counter+1);
+scanf("%d",&id[counter]);
+printf("Enter process %d burst time: ",counter+1);
+scanf("%d",&btime[counter]);
+printf("Enter process %d priority: ",counter+1);
+scanf("%d",&array[counter]);
+}
+
+for(counter=0;counter<n;counter++)
+{
+for(j=counter+1;j<n;j++)
+{
+if(array[counter]>array[j])
+{
+temp=array[counter];
+array[counter]=array[j];
+array[j]=temp;
+
+temp=btime[counter];
+btime[counter]=btime[j];
+btime[j]=temp;
+
+temp=id[counter];
+id[counter]=id[j];
+id[j]=temp;
+}
+}
+wtime[counter]=0;
+}
+
+for(counter=0;counter<n;counter++)
+{
+for(j=0;j<counter;j++)
+{
+wtime[counter]=wtime[counter]+btime[j];
+}
+tatime[counter]=wtime[counter]+btime[counter];
+}
+
+float avgwt=0,avgtat=0;
+printf("Process\tP\tBTime\tWTime\tTATime\n");
+for(counter=0;counter<n;counter++)
+{
+printf("%d\t%d\t%d\t%d\t%d\n",id[counter],array[counter],btime[counter],wtime[counter],tatime[counter]);
+avgwt=avgwt+wtime[counter];
+avgtat=avgtat+tatime[counter];
+if(counter==(n-1))
+{
+	int temp=wtime[counter]+tatime[counter];
+	printf("%d\t%d\t%d\t%d\t%d\n",0,0,0,temp,temp+5);
+}
+}
+
+avgwt=avgwt/n;
+avgtat=avgtat/n;
+printf("Average Waiting Time: %f\n",avgwt);
+printf("\nAverage Turnaround Time: %f",avgtat);
+}
