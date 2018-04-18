@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<conio.h>
+int absoluteValue(int value){
+	if(value<0){
+		value = -1 * value;
+	}
+	return value;
+}
+int main(){
+	int distance = 0,i;
+	printf("Enter cylinder number where the drive is currently serving:\n");
+	int cur;
+	scanf("%d",&cur);
+	printf("Enter number of pending requests:\n");
+	int n;
+	scanf("%d",&n);
+	int queue[n+1];
+	queue[0]=cur;
+	printf("Enter cylinder numbers:\n");
+	for(i=1;i<sizeof(queue)/4;i++){
+		scanf("%d",&queue[i]);
+	}
+	return 0;
+}
